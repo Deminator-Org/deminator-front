@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Deminator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is the front end part of a multiplayer minesweeper web-app.
 
 ## Available Scripts
 
