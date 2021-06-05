@@ -4,8 +4,8 @@ This project is the front end part of a multiplayer minesweeper web-app.
 
 # Install the projet 
 
-
-### `npm install react-scripts` `npm install`
+### `npm install`
+### `npm install react-scripts` 
 
 Install all dependencies neccessary to run the project.
 
