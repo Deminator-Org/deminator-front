@@ -1,21 +1,20 @@
 body {
-  font: 14px "Century Gothic", Futura, sans-serif;
-  margin: 20px;
+	font: 14px "Century Gothic", Futura, sans-serif;
+	margin: 20px;
 }
 
-ol,
-ul {
-  padding-left: 30px;
+ol, ul {
+	padding-left: 30px;
 }
 
 .board-row:after {
-  clear: both;
-  content: "";
-  display: table;
+	clear: both;
+	content: "";
+	display: table;
 }
 
 .status {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .bomb {
@@ -23,52 +22,57 @@ ul {
 }
 
 .square {
-  background: #fff;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  width: 34px;
-  border-radius: 5px;
+	background: #fff;
+	border: 1px solid #999;
+	float: left;
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 34px;
+	height: 34px;
+	margin-right: -1px;
+	margin-top: -1px;
+	padding: 0;
+	text-align: center;
+	width: 34px;
+	border-radius: 5px;
 }
 
 .square:focus {
-  outline: none;
+	outline: none;
 }
 
 .square:hover {
-  background-color: cornflowerblue;
+	background-color: cornflowerblue;
 }
 
 @keyframes test {
+<<<<<<< HEAD
   0% {
     transform: translateX(0px);
   }
   100% {
     transform: translateX(500px);
   }
+=======
+	0%{transform: translateX(0px);}
+	100%{transform: translateX(500px);}
+>>>>>>> 1afd42508b2775f48d9e0688ce91f93f22feb2ce
 }
 
 .square.animated {
-  animation: test 2s;
-  animation-fill-mode: forwards;
+	animation: test 2s;
+	animation-fill-mode: forwards;
 }
 
 .kbd-navigation .square:focus {
-  background: #ddd;
+	background: #ddd;
 }
 
 .game {
-  display: flex;
-  flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }
 
 .game-info {
-  margin-left: 20px;
+	margin-left: 20px;
 }
