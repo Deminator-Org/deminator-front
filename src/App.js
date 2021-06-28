@@ -1,10 +1,8 @@
-import './App.css';
-import Game from './Game.js';
+import "./App.css";
+import Game from "./Deminator.js";
 
 function App() {
-  return (
-    <Game size={15} lineSize={5}></Game>
-  );
+  return <Game width={15} height={15} lineSize={5}></Game>;
 }
 
 export default App;

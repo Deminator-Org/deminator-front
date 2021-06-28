@@ -3,7 +3,8 @@ body {
   margin: 20px;
 }
 
-ol, ul {
+ol,
+ul {
   padding-left: 30px;
 }
 
@@ -15,6 +16,10 @@ ol, ul {
 
 .status {
   margin-bottom: 10px;
+}
+
+.bomb {
+  background-image: "./bomb.svg";
 }
 
 .square {
@@ -42,8 +47,12 @@ ol, ul {
 }
 
 @keyframes test {
-  0%{transform: translateX(0px);}
-  100%{transform: translateX(500px);}
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(500px);
+  }
 }
 
 .square.animated {
