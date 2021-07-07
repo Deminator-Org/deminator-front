@@ -46,17 +46,8 @@ ol, ul {
 }
 
 @keyframes test {
-<<<<<<< HEAD
-  0% {
-    transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(500px);
-  }
-=======
 	0%{transform: translateX(0px);}
 	100%{transform: translateX(500px);}
->>>>>>> 1afd42508b2775f48d9e0688ce91f93f22feb2ce
 }
 
 .square.animated {

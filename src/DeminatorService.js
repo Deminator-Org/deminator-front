@@ -1,38 +1,52 @@
-function getGridTrue(url) {
-  var grid = [];
-  fetch(this.url, { mode: "cors" })
-    .then((res) => res.json())
-    .then((dem) => {
-      let g = dem.grid;
-      this.setState({
-        width: g.width,
-        height: g.height,
-      });
-
-      Object.entries(g.cells).forEach((entry) => {
-        let key = entry[0];
-        let value = entry[1];
-        const pos = this.getPos(key);
-
-        grid[pos] = {
-          isOpen: value.open,
-          isMine: value.mine,
-          value: value.mine ? -1 : 0,
-        };
-      });
-    });
-  this.setState({
-    cells: grid,
-  });
-  this.calculCells();
-}
-
-function getBombsTest(nb, width, height) {
-  var bombs = Array(nb);
-  for (let i = 0; i < nb; i++) {
-    bombs[i] = { x: getRandomInt(width), y: getRandomInt(height) };
+class DeminatorService {
+  constructor(url){
+    this.url = url;
   }
-  return bombs;
+
+  getRoom(room){
+    return fetch(this.url+"/"+room)
+    .then(resp=> console.log(resp));
+  }
+
+  getGrid() {
+    var grid = [];
+    fetch(this.url, { mode: "cors" })
+      .then((res) => res.json())
+      .then((dem) => {
+        let g = dem.grid;
+        this.setState({
+          width: g.width,
+          height: g.height,
+        });
+  
+        Object.entries(g.cells).forEach((entry) => {
+          let key = entry[0];
+          let value = entry[1];
+          const pos = this.getPos(key);
+  
+          grid[pos] = {
+            isOpen: value.open,
+            isMine: value.mine,
+            value: value.mine ? -1 : 0,
+          };
+        });
+      });
+    this.setState({
+      cells: grid,
+    });
+    this.calculCells();
+  }
+
+  getBombs() {
+  }
+
+  getBombsTest(nb, width, height) {
+    var bombs = Array(nb);
+    for (let i = 0; i < nb; i++) {
+      bombs[i] = { x: getRandomInt(width), y: getRandomInt(height) };
+    }
+    return bombs;
+  }
 }
 
 function getRandomInt(max) {
@@ -52,4 +66,4 @@ function getCoord(pos) {
   return x + "," + y;
 }
 
-export default getBombsTest;
+export default DeminatorService;

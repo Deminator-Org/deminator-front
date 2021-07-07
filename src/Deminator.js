@@ -1,13 +1,13 @@
 import React from "react";
 import classNames from "classnames";
 import bomb from "./image/bomb.svg"
-import DeminatorService from "./DeminatorService";
 
 class Game extends React.Component {
   constructor(props) {
     super(props);
     const height = this.props.height;
     const width = this.props.width;
+    this.demService = this.props.demServ;
     this.state = {
       width: height,
       height: width,
@@ -18,7 +18,7 @@ class Game extends React.Component {
   generateGrid() {
     const width = this.props.width;
     const height = this.props.height;
-    const bombs = DeminatorService(50, 15, 15);
+    const bombs = this.demService.getBombsTest(50, 15, 15);
     const dirs = [
       (x) => !((x + 1)%width)?-1:x + 1 - width,
       (x) => !((x + 1)%width)?-1:x + 1,
@@ -101,7 +101,7 @@ class Board extends React.Component {
 function Square(props) {
   const btnClass = classNames("square");
   let display = props.value > 0 ? props.value : "";
-  if(props.value == -1){
+  if(props.value === -1){
     display = <img src={bomb}  alt="Bomb"></img>
   }
   return (
