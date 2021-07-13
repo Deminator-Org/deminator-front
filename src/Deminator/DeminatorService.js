@@ -3,9 +3,8 @@ class DeminatorService {
     this.url = url;
   }
 
-  getRoom(room){
-    return fetch(this.url+"/"+room)
-    .then(resp=> console.log(resp));
+  setRoom(room){
+    this.room = room;
   }
 
   getGrid() {
@@ -37,16 +36,41 @@ class DeminatorService {
     this.calculCells();
   }
 
-  getBombs() {
+  getmines() {
+    let width, height, mines;
+    fetch(this.url, { mode: "cors" })
+      .then((res) => res.json())
+      .then((dem) => {
+        width = dem.game.width;
+        height = dem.game.height;
+        mines = dem.game.mines;
+      });
+    return {width, height, mines};
   }
 
-  getBombsTest(nb, width, height) {
-    var bombs = Array(nb);
-    for (let i = 0; i < nb; i++) {
-      bombs[i] = { x: getRandomInt(width), y: getRandomInt(height) };
+  getminesTest(nb, width, height, pos) {
+    var cantor = Array(nb+1);
+    if(pos < 0){
+      cantor[nb] = getCantorNumber(pos);
     }
-    return bombs;
+    var mines = Array(nb);
+    for (let i = 0; i < nb; i++) {
+      let x = getRandomInt(width);
+      let y = getRandomInt(height) ;
+      let cant = getCantorNumber(x, y);
+      if(cantor.includes(cant)){
+        i--;
+        continue;
+      }
+      cantor[i] = cant;
+      mines[i] = { x: x, y: y };
+    }
+    return mines;
   }
+}
+
+function getCantorNumber(x, y){
+  return 1 / 2 * (x+y)*(x+y+1)+y;
 }
 
 function getRandomInt(max) {
