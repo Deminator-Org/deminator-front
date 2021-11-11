@@ -1,6 +1,14 @@
+import DeminatorUtil from "./DeminatorUtil";
+
 class DeminatorService {
   constructor(url){
     this.url = url;
+  }
+
+  getGame(){
+    //const game = this.demService.getmines();
+    //const grid = this.generateGrid(game.width, game.height, game.mines)
+    return 
   }
 
   setRoom(room){
@@ -34,6 +42,17 @@ class DeminatorService {
       cells: grid,
     });
     this.calculCells();
+  }
+
+  generateGrid(width, height, mines) {
+    var grid = this.generateEmptyGrid(width, height);
+   
+    mines.forEach((mine) => {
+      var pos = mine.x * width + mine.y;
+      grid[pos].value = -1;
+      DeminatorUtil.forAroundCel(pos, (posPlus)=>grid[posPlus].value !== -1, (posPlus)=>grid[posPlus].value+=1, width, height);
+    });
+    return grid;
   }
 
   getmines() {
@@ -77,7 +96,7 @@ function getRandomInt(max) {
   return (Math.random() * max)|0;
 }
 
-function getPos(key) {
+/*function getPos(key) {
   const coord = key.split(",");
   const pos = parseInt(coord[0]) * this.state.width + parseInt(coord[1]);
   console.log(pos);
@@ -89,5 +108,5 @@ function getCoord(pos) {
   const y = pos % this.state.width;
   return x + "," + y;
 }
-
+*/
 export default DeminatorService;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import classNames from "classnames";
 import mine from "../image/mine.svg"
 import flag from "../image/flag.svg"
@@ -41,7 +41,6 @@ class Board extends React.Component {
 class Square extends React.Component{
     constructor(props){
         super(props);
-        console.log("test");
         this.state = {
             yolo:""
         }
