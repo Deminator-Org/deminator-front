@@ -1,4 +1,4 @@
-import DeminatorUtil from "./DeminatorUtil";
+import DeminatorUtil from "../DeminatorUtil";
 
 class DeminatorService {
   constructor(url){

@@ -46,6 +46,14 @@
     background-color: lightgray;
 }
 
+.square-blue {
+    background-color: lightblue;
+}
+
+.square-red {
+    background-color: lightcoral;
+}
+
 .game {
 	display: flex;
 	flex-direction: row;

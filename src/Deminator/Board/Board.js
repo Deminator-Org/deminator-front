@@ -20,10 +20,13 @@ class Board extends React.Component {
             const cels = row.cels.map((cel, id) => {
                 return (
                     <Square
-                        key={id}
-                        value={this.props.grid[cel].value}
-                        isOpen={this.props.grid[cel].isOpen}
+                        key     = {id}
+                        value   = {this.props.grid[cel].value}
+                        isOpen  = {this.props.grid[cel].isOpen}
+                        display = {this.props.grid[cel].display}
+                        player  = {this.props.grid[cel].player}
                         onClick={() => this.props.onClick(cel)}
+                        onRightClick={() => this.props.onRightClick(cel)}
                     />
                 );
             });
@@ -47,13 +50,17 @@ class Square extends React.Component{
     }
 
     setFlag(){
-        this.setState({
-            display:<img src={flag} alt="Flag"></img>
-        })
+        if(!this.state.display){
+            this.setState({display:<img src={flag} alt="Flag"></img>});
+        }
+        else{
+            this.setState({display:""});
+        }
+        this.props.onRightClick();
     }
 
     render(){
-        let btnClass = classNames("square", {'square-closed': !this.props.isOpen && !this.state.display});
+        let btnClass = classNames("square", {'square-closed': !this.props.isOpen && !this.state.display}, {'square-blue':this.props.player===0}, {'square-red':this.props.player===1});
         var display;
         if(this.props.isOpen){
             display = this.props.value > 0? this.props.value : "";

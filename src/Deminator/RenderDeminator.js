@@ -10,7 +10,8 @@ class RenderDeminator extends React.Component {
                 width={this.props.width}
                 height={this.props.height}
                 grid={this.props.grid}
-                onClick={(i) => this.props.handleClick(i)}
+                onClick={this.props.onClick}
+                onRightClick={this.props.onRightClick}
             />
             </div>
         </div>

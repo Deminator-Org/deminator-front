@@ -1,69 +1,53 @@
 import React from "react";
 import RenderDeminator from "./RenderDeminator";
-import DeminatorService from "./DeminatorServiceTest";
-import DeminatorUtil from "./DeminatorUtil";
+import DeminatorService from "./Services/DeminatorService2PlayerLocal";
 import classNames from "classnames"
 import Settings from "./Settings";
+import Score from "./Score";
 import "./Deminator.css";
 
-const DEFAULT_DEMSERV = new DeminatorService("http://127.0.0.1:4224/test");
+const DEFAULT_DEMSERV = new DeminatorService();
 
 
 class Deminator extends React.Component {
   constructor() {
     super();
     this.demService = DEFAULT_DEMSERV;
-    //this.grid = this.generateGridTest(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-    let st = this.demService.getGame();
-    this.state = {
-      width: st.width,
-      height: st.height,
-      grid: st.grid,
-      firstClick: true
-    };
+    this.state = this.demService.getGameSetup();
     document.addEventListener("contextmenu", (event) => event.preventDefault());
   }
 
-  handleClick(i) {
-    this.grid = this.state.grid;
-    const width = this.state.width;
-    const height = this.state.height;
-    if(this.grid[i].isOpen && !DeminatorUtil.isCompleted(i)){
-      return;
+  onClick(i) {
+    if(this.state.firstClick){
+      this.demService.initGame(i);
     }
-    this.openCel(i, width, height);
-    this.setState({
-      width: width,
-      height: height,
-      grid: this.grid,
-      firstClick: false
-    });
+    this.setState(this.demService.onClick(i));
   }
 
-  
-
-  openCel(pos){
-    this.grid[pos].isOpen = true;
-    if(this.grid[pos].value === 0){
-      DeminatorUtil.forAroundCel(pos, (posPlus)=>!this.grid[posPlus].isOpen, (posPlus)=>this.openCel(posPlus), this.state.width, this.state.height);
-    }
-    if(this.grid[pos].value === -1){
-      alert("Loser");
-    }
+  onRightClick(i){
+    this.setState(this.demService.onRightClick(i));
   }
-
-
 
   applySettings(obj){
     console.log(obj);
   }
 
   render(){
+    var score = "";
+    if(this.state.score){
+      score = <Score player={this.state.player+1} score={this.state.score}></Score>
+    }
     return(
-      
       <div>
         <Settings applySettings={this.applySettings}></Settings>
-        <RenderDeminator width={this.state.width} height={this.state.height} grid={this.state.grid} handleClick={(i)=>this.handleClick(i)}></RenderDeminator>
+        <RenderDeminator 
+            width={this.state.width} 
+            height={this.state.height} 
+            grid={this.state.grid} 
+            onClick={(pos)=>this.onClick(pos)} 
+            onRightClick={(pos)=>this.onRightClick(pos)}>
+        </RenderDeminator>
+        {score}
       </div>
     )
   }
