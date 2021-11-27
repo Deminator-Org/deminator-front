@@ -11,7 +11,7 @@ class DeminatorUtil{
     ];
 
     static generateEmptyGrid(width, height){
-        return Array(height * width).fill(null).map(()=>({value:0, isOpen:false}));
+        return Array(width * height).fill(null).map(()=>({value:0, isOpen:false, display:"", player:-1}));
     }
 
     static generateGrid(width, height, mines) {
@@ -27,7 +27,7 @@ class DeminatorUtil{
 
     static forAroundCel(pos, condition, func, width, height){
         for (let i = 0; i < DeminatorUtil.DIRS.length; i++) {
-            let posPlus = this.DIRS[i](pos, width, height);
+            var posPlus = this.DIRS[i](pos, width, height);
             if(posPlus < 0){
                 i += -posPlus;
                 continue;
@@ -40,8 +40,7 @@ class DeminatorUtil{
 
     static isCompleted(pos, grid, width, height){
         let value = grid[pos].value;
-        this.forArountCel(pos, (posPlus)=>grid[posPlus].isOpen && grid[posPlus].value === -1,()=>value--)
-
+        this.forAroundCel(pos, (posPlus)=>(!grid[posPlus].isOpen && grid[posPlus].display === "flag"),()=>value--, width, height)
         return value === 0;
     }
 }
